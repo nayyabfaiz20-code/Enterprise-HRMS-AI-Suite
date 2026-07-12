@@ -1,6 +1,17 @@
 import streamlit as st
 import requests
 import pandas as pd
+import subprocess
+import os
+import time
+
+# Backend ko background mein chalane ka jugaad
+if not os.path.exists("backend_started.txt"):
+    with open("backend_started.txt", "w") as f:
+        f.write("started")
+    # Yeh command backend server ko background mein start kar degi
+    subprocess.Popen(["uvicorn", "hrms_project.backend.main:app", "--host", "127.0.0.1", "--port", "8000"])
+    time.sleep(3) # Server ko on hone ke liye 3 second ka waqt dein
 
 st.title("Enterprise HRMS Dashboard")
 
